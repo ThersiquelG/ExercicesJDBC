@@ -102,4 +102,39 @@ public class MyStatements {
 
 		}
 	}
+
+	public void exercice5() {
+		String url = "jdbc:mysql://localhost/formation?AutoReconnect&useSSL=FALSE";
+		String usr="root";
+		String pwd ="root";
+
+		try {
+			Connection cn = (Connection) DriverManager.getConnection(url, usr, pwd);
+			Statement st = cn.createStatement();
+			String sql ="SELECT * FROM `REPRESENTANTS`\n" + 
+					"INNER JOIN `CLIENTS`, `PRODUITS`, `VENTES`\n" + 
+					"WHERE `COUL` = 'Rouge' AND `QT` > 100 AND `VENTES`.`NR` = `REPRESENTANTS`.`NR` AND `VENTES`.`NC` = `CLIENTS`.`NC` AND `VENTES`.`NP` = `PRODUITS`.`NP`;";
+			ResultSet result = st.executeQuery(sql);
+
+			String nomRep;
+			String nomClient;
+			String nomProduit;
+
+			int qte;
+			while(result.next()) {
+				nomRep = result.getString("NOMR");
+				nomClient = result.getString("NOMC");
+				nomProduit = result.getString("NOMP");
+
+				System.out.println("Vous avez demander : Les noms des représentants et clients qui ont acheté/vendu des produits rouges à plus de 100 quantitées");
+				System.out.println("Le représentant : " + nomRep + " a vendu " + nomProduit + " à  un dénommé " + nomClient + " de couleur " + result.getString("COUL"));
+			}
+
+		}
+
+		catch(SQLException e) {
+			e.printStackTrace();
+
+		}
+	}
 }

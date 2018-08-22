@@ -62,6 +62,13 @@ public class Demojdbc {
 		System.out.println("*******************************************");
 		MS.exercice4();
 		
+		
+		//partie 5
+		System.out.println("*******************************************");
+		System.out.println();
+		System.out.println("*******************************************");
+		MS.exercice5();
+		
 	}
 
 }
